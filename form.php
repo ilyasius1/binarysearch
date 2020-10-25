@@ -13,8 +13,5 @@
 </form>
 <a href="index.php?fill=30000000>Создать 30 000 000</a>
 <a href="index.php?fill=30000">Создать 30 000</a>
-<p><a href="index.php?fill=15000000">Создать 15000000</a></p>
-<p><a href="index.php?fill=15000000&first=15000001">Добавить еще 15000000</a></p>
-<p><a href="index.php?tester=15000000">Протестировать 15000000</a></p>
-<!--<H1>Результат:</H1>-->
-<!--<p>--><?//=$result?><!--</p>-->
+<p><a href="index.php?fill=10000000">Создать 10000000</a></p>
+<p><a href="index.php?fill=10000000&$first=0">Добавить еще 10000000</a></p>

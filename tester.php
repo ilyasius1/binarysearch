@@ -1,29 +1,32 @@
 <?php
-//$file = dirname(__FILE__) . "\\file";
+
 include_once 'search.php';
-function tester($file, $lastindex, $firstindex = 0) {
+
+/*
+ * Функция для тестирования binarySearch(). На больших файлах выполнение может прерваться по таймауту, поэтому необходимо указывать ограничители
+ * @param $fileName имя файла, аргумент для binarySearch()
+ * @param $lastindex - конечный индекс для проверки
+ * @param $firstindex - начальный индекс для проверки
+ * @return
+ */
+function tester($fileName, $lastindex, $firstindex = 0) {
     for($i = $firstindex; $i <= $lastindex; $i++) {
-        $key = 'ключ' . $i;
-        $value = binarySearch($file, $key);
-        $etalon = 'значение' . $i;
-        echo '$value = ' . $value;
-        echo '<br/>$key = ' . $key;
-        echo '<br/> четыреждыблядскаяярость! ' .strnatcmp($value, 'значение' . $i);
-        echo '<br/> НЕчетыреждыблядскаяярость! '; var_dump(!strnatcmp($value, 'значение' . $i));
-        if(strnatcmp($value, 'значение' . $i)){
-            echo '<p style="color: crimson">Несоответствие: </p>';
-            echo '<p>key = ' . $key .'; </p>';
-            echo '<p>value = ' . $value . '; strlen($value) = '. strlen($value) . '; </p>';
-            echo '<p>Должно быть value = ' . $etalon . '; strlen($etalon) = '. strlen($etalon) . ';</p>';
-            echo '==============================================<br/>';
+        $key = 'ключ' . $i;                                                                         //ключ по шаблону
+        $value = binarySearch($fileName, $key);                                                     //полученное с помощью поиска значение
+        $etalon = 'значение' . $i;                                                                  //эталон, каким должно быть значение
+        if(strnatcmp($value, 'значение' . $i)){                                                 //если результат не соответствует ожиданию, он выводится
+            $result[0] = '<p style="color: crimson">Несоответствие: </p>';
+            $result[0] .= '<p>key = ' . $key .'; </p>';
+            $result[0] .= '<p>value = ' . $value . '; strlen($value) = '. strlen($value) . '; </p>';
+            $result[0] .= '<p>Должно быть value = ' . $etalon . '; strlen($etalon) = '. strlen($etalon) . ';</p>';
+            $result[0] .= '==============================================<br/>';
         }
         else {
-            $successed[] = $i;
+            $successed[] = $i;                                                                      //в случае успеха номер добавляется в массив успешно проверенных
         }
     }
-    echo '<br/> Всего протестировано: (' . ($i - $firstindex) .')';
-    echo '<br/> Успешные индексы: (' . count($successed) .')';
-    echo '<pre>';
-    print_r($successed);
-    echo '</pre>';
+    $result[0] = '<br/> Всего протестировано: (' . ($i - $firstindex) .')';
+    $result[0] .= '<br/> Успешные индексы: (' . count($successed) .')';
+    $result[1] = $successed;
+    return $result;
 }
